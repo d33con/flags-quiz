@@ -1,0 +1,22 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+.flag {
+  width: 300px;
+}
+
+.question-container {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+}
+
+input[type="radio"] {
+  grid-column: 2 / 5;
+}
+
+.image {
+  grid-column: 2 / 3;
+}
