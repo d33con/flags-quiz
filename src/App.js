@@ -14,19 +14,19 @@ class App extends Component {
   }
 
   getCountriesData = () => {
-    fetch("https://restcountries.eu/rest/v2/all")
+    const apiEndpoint = "https://restcountries.eu/rest/v2/all";
+    fetch(apiEndpoint)
       .then(response => response.json())
       .then(data => {
         const arrLength = data.length;
-        const randNumArray = [];
+        const countries = [];
         for (var i = 1; i < 5; i++) {
           let randNum = Math.floor(Math.random() * arrLength);
-          randNumArray.push(data[randNum]);
+          countries.push(data[randNum]);
         }
-        this.setState({ countries: randNumArray });
+        this.setState({ countries });
         this.setQuestion();
       })
-      //.then(this.setQuestion())
       .catch(err => console.log(err));
   };
 
@@ -38,17 +38,29 @@ class App extends Component {
     this.setState({ flag, correctAnswer });
   };
 
+  onOptionChoose = e => {
+    this.setState({ submittedAnswer: e.target.value });
+  };
+
+  onSubmitAnswer = e => {
+    e.preventDefault();
+    this.state.correctAnswer === this.state.submittedAnswer
+      ? console.log("correct")
+      : console.log("wrong");
+  };
+
   render() {
     const countryChoices = this.state.countries.map(country => {
       return (
-        <div>
+        <div key={country.numericCode}>
           <input
             type="radio"
-            id="contactChoice1"
-            name="contact"
-            value="email"
+            id={country.demonym}
+            value={country.name}
+            onChange={this.onOptionChoose}
+            checked={this.state.submittedAnswer === country.name}
           />
-          <label htmlFor="contactChoice1">{country.name}</label>
+          <label htmlFor={country.demonym}>{country.name}</label>
         </div>
       );
     });
@@ -57,7 +69,10 @@ class App extends Component {
       <div className="App">
         <header>Country Flag Quiz!</header>
         <div className="question-container">
-          <form action="">{countryChoices}</form>
+          <form action="">
+            {countryChoices}
+            <button onClick={this.onSubmitAnswer}>Answer</button>
+          </form>
           <div className="image">
             <img src={this.state.flag} alt="" className="flag" />
           </div>
