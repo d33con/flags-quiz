@@ -1,11 +1,14 @@
 import React, { Component } from "react";
+import Answer from "./Answer";
 import "./App.css";
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      countries: []
+      countries: [],
+      answeredCorrectly: false,
+      showAnswer: false
     };
   }
 
@@ -24,7 +27,11 @@ class App extends Component {
           let randNum = Math.floor(Math.random() * arrLength);
           countries.push(data[randNum]);
         }
-        this.setState({ countries });
+        this.setState({
+          countries,
+          answeredCorrectly: false,
+          showAnswer: false
+        });
         this.setQuestion();
       })
       .catch(err => console.log(err));
@@ -45,8 +52,8 @@ class App extends Component {
   onSubmitAnswer = e => {
     e.preventDefault();
     this.state.correctAnswer === this.state.submittedAnswer
-      ? console.log("correct")
-      : console.log("wrong");
+      ? this.setState({ answeredCorrectly: true, showAnswer: true })
+      : this.setState({ answeredCorrectly: false, showAnswer: true });
   };
 
   render() {
@@ -76,6 +83,14 @@ class App extends Component {
           <div className="image">
             <img src={this.state.flag} alt="" className="flag" />
           </div>
+        </div>
+        <div className="answer-container">
+          <Answer
+            correct={this.state.answeredCorrectly}
+            newQuestion={this.getCountriesData}
+            showAnswer={this.state.showAnswer}
+            correctAnswer={this.state.correctAnswer}
+          />
         </div>
       </div>
     );
