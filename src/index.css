@@ -20,3 +20,11 @@ input[type="radio"] {
 .image {
   grid-column: 2 / 3;
 }
+
+.answer.shown {
+  visibility: visible;
+}
+
+.answer.hidden {
+  visibility: hidden;
+}
