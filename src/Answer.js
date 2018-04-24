@@ -16,6 +16,11 @@ const Answer = props => {
   );
 };
 
-Answer.propTypes = {};
+Answer.propTypes = {
+  showAnswer: PropTypes.bool.isRequired,
+  correct: PropTypes.bool.isRequired,
+  correctAnswer: PropTypes.string,
+  newQuestion: PropTypes.func.isRequired
+};
 
 export default Answer;
