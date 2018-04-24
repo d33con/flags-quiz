@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import Button from "material-ui/Button";
 
 const Answer = props => {
   return (
@@ -8,7 +9,9 @@ const Answer = props => {
       {props.correct ? null : (
         <div>The correct answer is: {props.correctAnswer}</div>
       )}
-      <button onClick={props.newQuestion}>Next Question</button>
+      <Button variant="raised" onClick={props.newQuestion}>
+        Next Question
+      </Button>
     </div>
   );
 };

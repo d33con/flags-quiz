@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Button from "material-ui/Button";
 import Answer from "./Answer";
 import "./App.css";
 
@@ -78,7 +79,14 @@ class App extends Component {
         <div className="question-container">
           <form action="">
             {countryChoices}
-            <button onClick={this.onSubmitAnswer}>Answer</button>
+            <Button
+              variant="raised"
+              color="primary"
+              onClick={this.onSubmitAnswer}
+              size="large"
+            >
+              Answer
+            </Button>
           </form>
           <div className="image">
             <img src={this.state.flag} alt="" className="flag" />
