@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import Button from "material-ui/Button";
+import Radio, { RadioGroup } from "material-ui/Radio";
+import { FormControl, FormLabel, FormControlLabel } from "material-ui/Form";
+import Typography from "material-ui/Typography";
 import Answer from "./Answer";
-import "./App.css";
 
 class App extends Component {
   constructor(props) {
@@ -31,7 +33,8 @@ class App extends Component {
         this.setState({
           countries,
           answeredCorrectly: false,
-          showAnswer: false
+          showAnswer: false,
+          submittedAnswer: ""
         });
         this.setQuestion();
       })
@@ -60,25 +63,32 @@ class App extends Component {
   render() {
     const countryChoices = this.state.countries.map(country => {
       return (
-        <div key={country.numericCode}>
-          <input
-            type="radio"
-            id={country.demonym}
-            value={country.name}
-            onChange={this.onOptionChoose}
-            checked={this.state.submittedAnswer === country.name}
-          />
-          <label htmlFor={country.demonym}>{country.name}</label>
-        </div>
+        <FormControlLabel
+          value={country.name}
+          control={<Radio />}
+          label={country.name}
+          checked={this.state.submittedAnswer === country.name}
+          key={country.numericCode}
+        />
       );
     });
 
     return (
-      <div className="App">
-        <header>Country Flag Quiz!</header>
+      <div className="app-container">
+        <Typography variant="display3" paragraph={true}>
+          Country Flag Quiz!
+        </Typography>
         <div className="question-container">
-          <form action="">
-            {countryChoices}
+          <FormControl component="form">
+            <FormLabel component="legend">Choose a country</FormLabel>
+            <RadioGroup
+              aria-label="country"
+              name="countryChoice"
+              value={this.state.submittedAnswer}
+              onChange={this.onOptionChoose}
+            >
+              {countryChoices}
+            </RadioGroup>
             <Button
               variant="raised"
               color="primary"
@@ -87,7 +97,7 @@ class App extends Component {
             >
               Answer
             </Button>
-          </form>
+          </FormControl>
           <div className="image">
             <img src={this.state.flag} alt="" className="flag" />
           </div>
