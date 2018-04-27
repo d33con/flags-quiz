@@ -3,24 +3,24 @@ import PropTypes from "prop-types";
 import Typography from "material-ui/Typography";
 import Button from "material-ui/Button";
 
-const Answer = props => {
+const Answer = ({ showAnswer, correctAnswer, newQuestion, correct }) => {
   return (
-    <div className={props.showAnswer ? "answer shown" : "answer hidden"}>
+    <div className={showAnswer ? "answer shown" : "answer hidden"}>
       <Typography variant="display3" gutterBottom>
-        {props.correct ? "Correct!" : "Wrong!"}
+        {correct ? "Correct!" : "Wrong!"}
       </Typography>
-      {props.correct ? null : (
+      {correct ? null : (
         <Typography variant="display1" gutterBottom>
-          The correct answer is: {props.correctAnswer}
+          The correct answer is: {correctAnswer}
         </Typography>
       )}
       <Button
         variant="raised"
         color="secondary"
         size="large"
-        onClick={props.newQuestion}
+        onClick={newQuestion}
       >
-        Next Question
+        Next Flag
       </Button>
     </div>
   );
