@@ -61,13 +61,22 @@ class App extends Component {
   };
 
   render() {
-    const countryChoices = this.state.countries.map(country => {
+    const {
+      countries,
+      submittedAnswer,
+      flag,
+      answeredCorrectly,
+      showAnswer,
+      correctAnswer
+    } = this.state;
+
+    const countryChoices = countries.map(country => {
       return (
         <FormControlLabel
           value={country.name}
           control={<Radio />}
           label={country.name}
-          checked={this.state.submittedAnswer === country.name}
+          checked={submittedAnswer === country.name}
           key={country.numericCode}
         />
       );
@@ -76,7 +85,7 @@ class App extends Component {
     return (
       <div className="app-container">
         <Typography variant="display3" paragraph={true}>
-          Country Flag Quiz!
+          Country Flag Quiz
         </Typography>
         <div className="question-container">
           <FormControl component="form">
@@ -84,7 +93,7 @@ class App extends Component {
             <RadioGroup
               aria-label="country"
               name="countryChoice"
-              value={this.state.submittedAnswer}
+              value={submittedAnswer}
               onChange={this.onOptionChoose}
             >
               {countryChoices}
@@ -99,15 +108,15 @@ class App extends Component {
             </Button>
           </FormControl>
           <div className="image">
-            <img src={this.state.flag} alt="" className="flag" />
+            <img src={flag} alt="" className="flag" />
           </div>
         </div>
         <div className="answer-container">
           <Answer
-            correct={this.state.answeredCorrectly}
+            correct={answeredCorrectly}
             newQuestion={this.getCountriesData}
-            showAnswer={this.state.showAnswer}
-            correctAnswer={this.state.correctAnswer}
+            showAnswer={showAnswer}
+            correctAnswer={correctAnswer}
           />
         </div>
       </div>
