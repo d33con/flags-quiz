@@ -1,5 +1,4 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500");
-
 body {
   margin: 0;
   padding: 0;
@@ -23,8 +22,11 @@ body {
   padding: 30px;
 }
 
-form > div {
-  text-align: left;
+.answer-button {
+  margin-top: 20px !important;
+}
+
+form>div {
   padding-left: 100px;
   font-size: 20px;
 }
